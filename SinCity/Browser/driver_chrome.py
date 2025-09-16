@@ -3,11 +3,10 @@ from selenium.webdriver.chrome.options import Options
 from SinCity.Agent.header import header
 
 def driver_chrome():
-    profileChrome = 'ProfileChrome'
+    profileChrome = 'profileChrome'
 
     head = header()['User-Agent']
 
-    print(head)
     chrome_options = Options()
     # Подключение своего профиля
     chrome_options.add_argument(f"--user-agent={head}")
