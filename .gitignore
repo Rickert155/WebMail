@@ -1,0 +1,6 @@
+Data/login.json
+venv/
+profileChrome/
+Result/
+Trash/
+**/__pycache__/

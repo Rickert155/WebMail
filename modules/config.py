@@ -1,0 +1,11 @@
+result_dir = 'Result'
+
+base_dir = 'Base'
+
+data_dir = 'Data'
+data_login = f'{data_dir}/login.json'
+
+trash_dir = 'Trash'
+
+timeout_send_message = 60
+
