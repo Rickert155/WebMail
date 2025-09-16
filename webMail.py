@@ -15,8 +15,10 @@ def ListBase():
         if '.csv' in base:list_base.append(base)
     return list_base
 
+def successSend():
+    print(f'{GREEN}Успешная отпарвка{RESET}')
 
-def SendMessage(driver):
+def SendMessage(driver, recipient:str, subject:str, message:str):
     try:
         button_compose = driver.find_element(By.CLASS_NAME, 'compose')
         button_compose.click()
@@ -34,7 +36,7 @@ def SendMessage(driver):
                             'aria-autocomplete'
                             )
                     if role_combobox == 'combobox' and autocomplete_list == 'list':
-                        recipient_field.send_keys('test@text.com')
+                        recipient_field.send_keys(recipient)
                         time.sleep(timeout_click)
                         break
                 except:
@@ -44,20 +46,36 @@ def SendMessage(driver):
     
     try:
         subject_field = driver.find_element(By.ID, 'compose-subject')
-        subject_field.send_keys('Test')
+        subject_field.send_keys(subject)
         time.sleep(timeout_click)
     except:
         sys.exit(f'{RED}ошибка при обнаружении поля для темы письма{RESET}')
 
     try:
         message_field = driver.find_element(By.NAME, '_message')
-        message_field.send_keys('Test Message')
+        message_field.send_keys(message)
         time.sleep(timeout_click)
     except:
         sys.exit(
                 f'{RED}ошибка при обнаружении поля для ввода сообщения\n'
                 f'Необходимо проверить настройки: Настройки -> Создание сообщений'
                 f' -> Создавать сообщения в HTML - поставить "никогда"{RESET}')
+
+    try:
+        try:
+            button = driver.find_element(By.ID, 'rcmbtn111').click()
+            successSend()
+            time.sleep(timeout_click)
+        except:
+            pass
+        try:
+            button = driver.find_element(By.ID, 'rcmbtn111-clone').click()
+            successSend()
+            time.sleep(timeout_click)
+        except:
+            pass
+    except Exception as err:
+        sys.exit(f'{RED}ошибка при поиске/нажитии кнопи отправки письма{RESET}\n{err}')
         
 
 
@@ -70,7 +88,8 @@ def WebMail():
     try:
         driver = LoginWebMail()
         if driver != None:
-            SendMessage(driver)
+            for base in list_base:
+                pass
         else:
             sys.exit(f'{RED}driver = None{RESET}')
     except Exception as err:
