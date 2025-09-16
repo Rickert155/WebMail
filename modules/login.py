@@ -30,10 +30,8 @@ def checkCaptcha(driver):
     else:
         return False
 
-def auth_web_mail(login:str, password:str, url:str):
-    driver = None
+def auth_web_mail(driver, login:str, password:str, url:str):
     try:
-        driver = driver_chrome()
         driver.get(url)
         time.sleep(3)
 
@@ -77,35 +75,48 @@ def auth_web_mail(login:str, password:str, url:str):
                 f'{RED}Авторизация не пройдена!{RESET}\n'
                 f'Error: {err}'
                 )
-    finally:
         if driver != None:
             driver.quit()
 
 def LoginWebMail():
-    auth_data = getLoginData()
+    driver = None
+    try:
+        auth_data = getLoginData()
     
-    login = auth_data['login']
-    password = auth_data['password']
-    url_login = auth_data['url_login']
+        login = auth_data['login']
+        password = auth_data['password']
+        url_login = auth_data['url_login']
 
-    print(f'url:\t\t{url_login}')
+        print(f'url:\t\t{url_login}')
     
-    login_state = False
-    count_login, max_count_login = 0, 3
-    while login_state != True:
-        count_login+=1
-        auth = auth_web_mail(login=login, password=password, url=url_login)
-        if auth == 'Captcha':
-            print(
-                    f'{RED}[{count_login}/{max_count_login}] '
-                    f'Обнаружена проверка анти-бот!{RESET}'
-                    )
-        if auth == 'OK':
-            login_state = True
-            print(f'{GREEN}Авторизация прошла успешно{RESET}')
+        login_state = False
+        count_login, max_count_login = 0, 3
+        while login_state != True:
+            count_login+=1
+            driver = driver_chrome()
+            auth = auth_web_mail(driver, login=login, password=password, url=url_login)
+            if auth == 'Captcha':
+                print(
+                        f'{RED}[{count_login}/{max_count_login}] '
+                        f'Обнаружена проверка анти-бот!{RESET}'
+                        )
+                if driver != None:
+                    driver.quit()
 
-        if count_login == max_count_login:
-            break
+            if auth == 'OK':
+                login_state = True
+                print(f'{GREEN}Авторизация прошла успешно{RESET}')
+                return driver
+
+            if count_login == max_count_login:
+                if driver != None:
+                    driver.quit()
+                return None
+    
+    except Exception as err:
+        sys.exit(f'{RED}{err}{RESET}')
+        if driver != None:
+            driver.quit()
 
 if __name__ == '__main__':
-    LoginWebMail()
+    auth = LoginWebMail()
