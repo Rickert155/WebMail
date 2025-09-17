@@ -1,6 +1,7 @@
+from modules.config import data_dir
 import json, os
 
-template_json = 'letter.json'
+template_json = f'{data_dir}/letter.json'
 
 def processingText(text:str):
     template_agency = '[AGENCY NAME]'
