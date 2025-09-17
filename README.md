@@ -41,8 +41,8 @@ python3 -m modules.create_message 'это тема' 'Это тело письм�
 ```
 Пример:
 ```sh
-python3 -m modules.create_message \                                                 
-        'Hello, [NAME]' \                                                           
+python3 -m modules.create_message \
+        'Hello, [NAME]' \
         'Testing message to [COMPANY NAME]. My name is [SENDER NAME]' 
 ```
 Эту же подсказку можно получить вызвав модуль без параметров
