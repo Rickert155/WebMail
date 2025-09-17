@@ -20,3 +20,25 @@ cd WebMail && python3 -m venv venv && ./venv/bin/pip install -r package.txt
 cp Data/template_login.json Data/login.json
 ```
 
+## Тестирование создания письма для рассылки
+Необходимо передать два параметра:  
+Первым параметром Тему письма  
+Вторым параметром Тело письма  
+
+Пример:
+```sh
+python3 -m modules.create_message 'это тема' 'Это тело письма'
+```
+Возможно передать переменные:  
+```sh
+[COMPANY NAME] [NAME]
+```
+Пример:
+```sh
+python3 -m modules.create_message 'Hello, [NAME]' 'Testing message to [COMPANY NAME]'
+```
+Эту же подсказку можно получить вызвав модуль без параметров
+```sh
+python3 -m modules.create_message
+```
+
