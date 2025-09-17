@@ -16,6 +16,7 @@ def getLoginData(login_config:str=None):
             data = json.load(file)
             
             auth_data = {
+                    "sender_name":data['sender_name'],
                     "login":data['login'],
                     "password":data['password'],
                     "url_login":data['url']
