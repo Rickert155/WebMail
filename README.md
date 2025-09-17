@@ -37,11 +37,13 @@ python3 -m modules.create_message 'это тема' 'Это тело письм�
 ```
 Возможно передать переменные:  
 ```sh
-[COMPANY NAME] [NAME]
+[COMPANY NAME] [NAME] [SENDER NAME]
 ```
 Пример:
 ```sh
-python3 -m modules.create_message 'Hello, [NAME]' 'Testing message to [COMPANY NAME]'
+python3 -m modules.create_message \\                                                 
+        'Hello, [NAME]' \\                                                           
+        'Testing message to [COMPANY NAME]. My name is [SENDER NAME]' 
 ```
 Эту же подсказку можно получить вызвав модуль без параметров
 ```sh
