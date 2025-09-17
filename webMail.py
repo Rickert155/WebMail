@@ -2,6 +2,7 @@ from SinCity.Browser.driver_chrome import driver_chrome
 from SinCity.colors import RED, RESET, GREEN
 
 from modules.config import base_dir
+from modules.helper import helper
 from modules.miniTools import iniMailer
 
 from modules.send_message import SendMessage
@@ -40,4 +41,16 @@ def WebMail():
             driver.quit()
 
 if __name__ == '__main__':
-    WebMail()
+    params = sys.argv
+    if len(params) == 1:
+        WebMail()
+    elif len(params) > 3 and '--config' in params[1] and '.json' in params[2]:
+        login_config = params[2]
+        if os.path.exists(login_config):
+            WebMail(login_config=login_config)
+        else:
+            helper()
+    elif '--help' in params:
+        helper()
+    else:
+        helper()
