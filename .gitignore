@@ -4,3 +4,5 @@ profileChrome/
 Result/
 Trash/
 **/__pycache__/
+**/letter.json
+letter.json
