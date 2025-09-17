@@ -27,9 +27,9 @@ def WebMail():
         if driver != None:
             SendMessage(
                     driver, 
-                    recipient="maksimnegulyaev@gmail.com",
-                    subject="Subject to max",
-                    message="Hello, Max!"
+                    recipient="@gmail.com",
+                    subject="",
+                    message="Hello!"
                     )
                 
         else:
