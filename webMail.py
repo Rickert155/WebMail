@@ -17,14 +17,14 @@ def ListBase():
     return list_base
 
 
-def WebMail():
+def WebMail(login_config:str=None):
     iniMailer()
     
     list_base = ListBase()
     print(list_base)
 
     try:
-        driver = LoginWebMail()
+        driver = LoginWebMail(login_config=login_config)
         if driver != None:
             SendMessage(
                     driver, 
@@ -44,11 +44,12 @@ if __name__ == '__main__':
     params = sys.argv
     if len(params) == 1:
         WebMail()
-    elif len(params) > 3 and '--config' in params[1] and '.json' in params[2]:
+    elif len(params) == 3 and '--config' in params[1] and '.json' in params[2]:
         login_config = params[2]
         if os.path.exists(login_config):
             WebMail(login_config=login_config)
         else:
+            print(f'{RED}Файл конфигурации {login_config} не обнаружен{RESET}')
             helper()
     elif '--help' in params:
         helper()

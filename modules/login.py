@@ -8,9 +8,11 @@ from modules.config import timeout_login
 
 import json, os, time, sys
 
-def getLoginData():
-    if os.path.exists(data_login):
-        with open(data_login, 'r') as file:
+def getLoginData(login_config:str=None):
+    if login_config == None:path_file = data_login
+    if login_config != None:path_file = login_config
+    if os.path.exists(path_file):
+        with open(path_file, 'r') as file:
             data = json.load(file)
             
             auth_data = {
@@ -78,10 +80,10 @@ def auth_web_mail(driver, login:str, password:str, url:str):
         if driver != None:
             driver.quit()
 
-def LoginWebMail():
+def LoginWebMail(login_config:str=None):
     driver = None
     try:
-        auth_data = getLoginData()
+        auth_data = getLoginData(login_config=login_config)
     
         login = auth_data['login']
         password = auth_data['password']
