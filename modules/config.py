@@ -4,6 +4,7 @@ base_dir = 'Base'
 
 data_dir = 'Data'
 data_login = f'{data_dir}/login.json'
+template_letter = f'{data_dir}/letter.json'
 
 trash_dir = 'Trash'
 

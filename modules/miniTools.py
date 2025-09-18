@@ -5,9 +5,10 @@ from modules.config import (
         data_dir, 
         result_dir, 
         trash_dir,
-        users_dir
+        users_dir,
+        template_letter
         )
-import csv, os, sys, time
+import csv, os, sys, time, json
 
 def iniMailer():
     if not os.path.exists(base_dir):
@@ -21,6 +22,41 @@ def iniMailer():
         os.makedirs(trash_dir)
     if not os.path.exists(users_dir):
         os.makedirs(users_dir)
+
+def checkCountTemplates():
+    try:
+        with open(template_letter, 'r') as file:
+            data = json.load(file)
+    
+        if len(data) > 0:
+            return len(data)
+        else:
+            sys.exit(f'{RED}Шаблоны в {template_letter} отсутствуют!{RESET}')
+    except FileNotFoundError:
+        sys.exit(
+                f'{RED}Шаблоны текстов не обнаружены!\n'
+                f'file not found error: {template_letter}{RESET}'
+                )
+    except json.decoder.JSONDecodeError:
+        with open(template_letter, 'w') as file:
+            json.dump([], file, indent=4)
+        sys.exit(
+                f'{RED}Некорректный json файл{template_letter}\n'
+                f'Документ перезаписан на пустой список [] !{RESET}')
+
+def selectTemplateLetter(number_email:int=None):
+    with open(template_letter, 'r') as file:
+        data = json.load(file)
+        for template in data:
+            id_ = template['id']
+            theme = template['theme']
+            message = template['body']
+
+            print(
+                    f'ID:\t{id_}\n'
+                    f'Subject: {theme}\n'
+                    f'Message: {message}\n'
+                    )
 
 def CheckSendEmail():
     list_email = set()

@@ -1,7 +1,5 @@
-from modules.config import data_dir
+from modules.config import data_dir, template_letter
 import json, os
-
-template_json = f'{data_dir}/letter.json'
 
 def processingText(text:str):
     template_agency = '[AGENCY NAME]'
@@ -23,14 +21,14 @@ def get_body():
 # Проверка наличия/Запись в JSON
 #######################################
 def CheckJson():
-    if not os.path.exists(template_json):
+    if not os.path.exists(template_letter):
         data = []
-        with open(template_json, 'w') as file:
+        with open(template_letter, 'w') as file:
             json.dump(data, file, indent=4)
     
     else:
         divide_line = '='*40
-        with open(template_json, 'r') as file:
+        with open(template_letter, 'r') as file:
             data = json.load(file)
         for info in data:
             id_info = info["id"]
@@ -46,7 +44,7 @@ def CheckJson():
     return len(data)
         
 def updateJson(id_current:int, theme:str, body:str):
-    with open(template_json, 'r') as file:
+    with open(template_letter, 'r') as file:
         data = json.load(file)
 
     new_id = id_current+1
@@ -56,7 +54,7 @@ def updateJson(id_current:int, theme:str, body:str):
             "body":body
             }
     data.append(new_data)
-    with open(template_json, 'w') as file:
+    with open(template_letter, 'w') as file:
         json.dump(data, file, indent=4)
 
 #######################################

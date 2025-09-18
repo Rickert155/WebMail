@@ -23,15 +23,20 @@ def WebMail(login_config:str=None):
     list_base = ListBase()
     if len(list_base) == 0:sys.exit(f'{RED}Нет базы для рассылки!{RESET}')
     
+    """Получаем список(множество) завершенных получателей"""
     complite_list_email = CheckSendEmail()
 
     user_data = getLoginData(login_config=login_config)
-
     limit = user_data['limit']
     sender = user_data['login']
-
+    
+    """Считаем отправленные сообщения за сессию"""
     current_send_mail = 0
-
+    
+    """Логинимся в почтовик"""
+    driver = LoginWebMail(login_config=login_config)
+    
+    """Перебираем все базы"""
     for base in list_base:
         with open(base, 'r') as file:
             number_email = 0
@@ -42,10 +47,12 @@ def WebMail(login_config:str=None):
                 try:name = row['Name']
                 except:name = None
 
+                """Если только не отправляли ранее этому получателю"""
                 if email not in complite_list_email:
                     current_send_mail+=1
                     print(f'[{number_email}] {email} | {name}')
                     
+                    """Пишем в док, что отправили"""
                     RecordingSendEmail(
                             email=email, 
                             company=company, 
@@ -59,7 +66,6 @@ def WebMail(login_config:str=None):
 
 
     try:
-        driver = LoginWebMail(login_config=login_config)
         if driver != None:
             """
             SendMessage(
