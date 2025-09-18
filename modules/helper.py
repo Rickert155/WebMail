@@ -17,6 +17,19 @@ def helpStartWebMail():
     """
     print(text)
 
+def helpMultiUserMod():
+    text = f"""\
+    {BLUE}<Мультипользовательский режим>{RESET}{RED}
+    Инструмент может рассылать с нескольких аккаунтов. 
+    Для этого необходимо добавить конфигурации юзеров в Users.                                                
+    Запуск модуля:                                                                                                                                                               
+    python3 -m modules.multi_user
+    {RESET}\
+    """
+    print(text)
+
+
 def helper():
     helpStartWebMail()
     helpCreateMessage()
+    helpMultiUserMod()

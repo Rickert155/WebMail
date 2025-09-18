@@ -36,12 +36,16 @@ def WebMail(login_config:str=None):
             pass
         else:
             sys.exit(f'{RED}driver = None{RESET}')
+
     except Exception as err:
         sys.exit(f'{RED}Error: {err}{RESET}')
 
     finally:
-        if driver != None:
-            driver.quit()
+        try:
+            if driver != None:
+                driver.quit()
+        except UnboundLocalError:
+            pass
 
 if __name__ == '__main__':
     params = sys.argv

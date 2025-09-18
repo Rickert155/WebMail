@@ -1,5 +1,6 @@
-from SinCity.colors import RED, RESET
+from SinCity.colors import RED, RESET, BLUE
 
+from modules.helper import helpMultiUserMod
 from modules.config import users_dir
 from webMail import WebMail
 import os, json, sys
@@ -21,11 +22,17 @@ def initMultiUserMod():
         sys.exit(f'{RED}Конфигурации пользователей не обнаружены!{RESET}')
 
 if __name__ == '__main__':
-    users = initMultiUserMod()
-    
-    number_user = 0
-    for user in users:
-        number_user+=1
-        print(f'[{number_user}] {user}')
-        WebMail(login_config=user)
+    params = sys.argv
+    if '--help' in params:
+        helpMultiUserMod()
+   
+    else:
+        users = initMultiUserMod()
+
+        number_user = 0
+        for user in users:
+            number_user+=1
+            print(f'[{number_user}] {user}')
+            WebMail(login_config=user)
+
     

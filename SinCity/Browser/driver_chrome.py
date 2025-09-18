@@ -18,6 +18,12 @@ def driver_chrome():
     chrome_options.add_experimental_option('useAutomationExtension', False)
     chrome_options.add_argument("start-maximized")
     
+    prefs = {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False
+        }
+    chrome_options.add_experimental_option("prefs", prefs)
+    
     driver_chrome = webdriver.Chrome(options=chrome_options)
 
     return driver_chrome
