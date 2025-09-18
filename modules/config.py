@@ -7,6 +7,8 @@ data_login = f'{data_dir}/login.json'
 
 trash_dir = 'Trash'
 
+users_dir = 'Users'
+
 timeout_login = 1
 timeout_click = 2
 timeout_send_message = 60

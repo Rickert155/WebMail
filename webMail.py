@@ -21,22 +21,25 @@ def WebMail(login_config:str=None):
     iniMailer()
     
     list_base = ListBase()
-    print(list_base)
 
     try:
         driver = LoginWebMail(login_config=login_config)
         if driver != None:
+            """
             SendMessage(
                     driver, 
                     recipient="@gmail.com",
                     subject="",
                     message="Hello!"
                     )
-                
+            """
+            pass
         else:
             sys.exit(f'{RED}driver = None{RESET}')
     except Exception as err:
         sys.exit(f'{RED}Error: {err}{RESET}')
+
+    finally:
         if driver != None:
             driver.quit()
 

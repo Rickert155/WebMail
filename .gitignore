@@ -1,4 +1,5 @@
 Data/login.json
+Users/*.json
 venv/
 profileChrome/
 Result/

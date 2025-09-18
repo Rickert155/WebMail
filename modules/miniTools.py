@@ -1,6 +1,12 @@
 from SinCity.colors import RED, RESET, GREEN
 
-from modules.config import base_dir, data_dir, result_dir, trash_dir
+from modules.config import (
+        base_dir, 
+        data_dir, 
+        result_dir, 
+        trash_dir,
+        users_dir
+        )
 import csv, os, sys
 
 def iniMailer():
@@ -13,3 +19,5 @@ def iniMailer():
         os.makedirs(data_dir)
     if not os.path.exists(trash_dir):
         os.makedirs(trash_dir)
+    if not os.path.exists(users_dir):
+        os.makedirs(users_dir)

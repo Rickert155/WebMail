@@ -11,7 +11,7 @@ def driver_chrome():
     # Подключение своего профиля
     chrome_options.add_argument(f"--user-agent={head}")
     chrome_options.add_argument("--dns-server=8.8.8.8,8.8.4.4")
-    chrome_options.add_argument(f'--user-data-dir={profileChrome}')
+    #chrome_options.add_argument(f'--user-data-dir={profileChrome}')
     chrome_options.add_argument("--disable-blink-features")
     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
