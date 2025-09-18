@@ -10,7 +10,7 @@ from modules.config import (
         )
 import csv, os, sys, time, json
 
-def iniMailer():
+def initMailer():
     if not os.path.exists(base_dir):
         os.makedirs(base_dir)
         sys.exit(f'{RED}Загрузите базу в директорию {base_dir}{RESET}')
@@ -51,12 +51,8 @@ def selectTemplateLetter(number_email:int=None):
             id_ = template['id']
             theme = template['theme']
             message = template['body']
-
-            print(
-                    f'ID:\t{id_}\n'
-                    f'Subject: {theme}\n'
-                    f'Message: {message}\n'
-                    )
+            
+        return data[number_email]['theme'], data[number_email]['body']
 
 def CheckSendEmail():
     list_email = set()
