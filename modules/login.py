@@ -19,7 +19,8 @@ def getLoginData(login_config:str=None):
                     "sender_name":data['sender_name'],
                     "login":data['login'],
                     "password":data['password'],
-                    "url_login":data['url']
+                    "url_login":data['url'],
+                    "limit":data['limit']
                     }
             return auth_data
 
