@@ -6,7 +6,7 @@ from modules.config import base_dir, timeout_click
 import sys, time
 
 def successSend():
-    print(f'{GREEN}Успешная отпарвка{RESET}')
+    print(f'{GREEN}Успешная отпарвка{RESET}\n')
 
 def SendMessage(driver, recipient:str, subject:str, message:str):
     try:

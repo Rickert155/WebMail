@@ -109,7 +109,6 @@ def LoginWebMail(login_config:str=None):
 
             if auth == 'OK':
                 login_state = True
-                print(f'{GREEN}Авторизация прошла успешно{RESET}')
                 return driver
 
             if count_login == max_count_login:

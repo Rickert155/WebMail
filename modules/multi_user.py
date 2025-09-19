@@ -32,7 +32,7 @@ if __name__ == '__main__':
         number_user = 0
         for user in users:
             number_user+=1
-            print(f'[{number_user}] {user}')
+            print(f'[{number_user}]\t\t{user}')
             WebMail(login_config=user)
 
     

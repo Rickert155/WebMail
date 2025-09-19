@@ -47,9 +47,20 @@ def WebMail(login_config:str=None):
     try:
         """Логинимся в почтовик"""
         driver = LoginWebMail(login_config=login_config)
+
+        def lenListEmails(base:str):
+            count_email = set()
+            with open(base, 'r') as file:
+                for row in csv.DictReader(file):
+                    email = row['Email']
+                    count_email.add(email)
+            return len(count_email)
         
         """Перебираем все базы"""
         for base in list_base:
+            """Посчитаем длину списка базы для рассылки"""
+            len_list_emails = lenListEmails(base=base)
+            
             with open(base, 'r') as file:
                 number_email = 0
                 count_template = 0
@@ -64,7 +75,10 @@ def WebMail(login_config:str=None):
                     if email not in complite_list_email:
                         current_send_mail+=1
                         count_template+=1
-                        print(f'[{number_email}] {email} | {name}')
+                        print(
+                                f'[{GREEN}{number_email}/{RED}{len_list_emails}{RESET}] '
+                                f'{company} | {email}'
+                                )
 
                         """Получаем письмо из темплейтов"""
                         template_letter = selectTemplateLetter(
@@ -86,6 +100,8 @@ def WebMail(login_config:str=None):
                                 name=name,
                                 sender_name=sender
                                 )
+                        if '\u001bE' in message:
+                            message = message.replace('\u001bE', '\n')
                         """Отправляем письмо"""
                         SendMessage(
                             driver, 
@@ -111,7 +127,8 @@ def WebMail(login_config:str=None):
                         print(f'{YELLOW}sleep {timeout_send_message} s...{RESET}')
                         time.sleep(timeout_send_message)
 
-
+        if current_send_mail == 0:
+            sys.exit(f'{GREEN}Все письма отправлены!{RESET}')
     
     except KeyboardInterrupt:
         sys.exit(f'{RED}\nExit...{RESET}')
